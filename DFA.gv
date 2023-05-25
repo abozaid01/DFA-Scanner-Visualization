@@ -1,0 +1,226 @@
+digraph DFA {
+    node [shape=doublecircle]; Error Predicates lowercasename Clauses Goal Identifier Integer Symbol Char String Real singlelinecomment multilinecommnet LeftBracket RightBracket Dot EqualOp LessThanOp LessThanOrEqualOp GreaterThanOp GreaterThanOrEqualOp NotEqualOp PlusOp MinusOp MultiplyOp DivideOp Constant Comma Semicolon Colon Read Readint Readchar Readln Write Writeln;
+    node [shape=circle]; START Error;
+
+
+    ######################  ReservedWords  ######################
+    //Predicates
+    START -> Predicates [label="predicates"];
+    Predicates -> lowercasename [label="^[A-Z_][a-zA-Z0-9_]*"]
+    Predicates -> Error [label="[|\\!@#{}'$^&].*"]
+
+    //Clauses
+    START -> Clauses [label="clauses"];
+    Clauses -> lowercasename [label="^[A-Z_][a-zA-Z0-9_]*"]
+    Clauses -> Error [label="[|\\!@#{}'$^&].*"]
+
+    //Goal
+    START -> Goal [label="goal"];
+    Goal -> lowercasename[label="^[A-Z_][a-zA-Z0-9_]*"]
+    Goal -> Error [label="[|\\!@#{}'$^&].*"]
+
+    //Write
+    START -> Write [label="write"];
+    Write -> lowercasename[label="^[A-Z_][a-zA-Z0-9_]*"]
+    Write -> Error [label="[|\\!@#{}'$^&].*"]
+
+    //Read
+    START -> Read [label="read"];
+    Read -> lowercasename[label="^[A-Z_][a-zA-Z0-9_]*"]
+    Read -> Error [label="[|\\!@#{}'$^&].*"]
+
+
+    //Readint
+    START -> Readint [label="readint"];
+    Readint -> lowercasename[label="^[A-Z_][a-zA-Z0-9_]*"]
+    Readint -> Error [label="[|\\!@#{}'$^&].*"]
+
+
+
+    //Readchar
+    START -> Readchar [label="readchar"];
+    Readchar -> lowercasename[label="^[A-Z_][a-zA-Z0-9_]*"]
+    Readchar -> Error [label="[|\\!@#{}'$^&].*"]
+
+    // Readln
+    START -> Readln [label="readln"];
+    Readln -> lowercasename[label="^[A-Z_][a-zA-Z0-9_]*"]
+    Readln -> Error [label="[|\\!@#{}'$^&].*"]
+
+    // Writeln
+    START -> Writeln [label="witeln"];
+    Writeln -> lowercasename[label="^[A-Z_][a-zA-Z0-9_]*"]
+    Writeln -> Error [label="[|\\!@#{}'$^&].*"]
+
+######################  Opereators  ######################
+
+    //+
+    START -> PlusOp [label="+"];
+    PlusOp -> Error [label="[|\\!@#{}'$^&].*"]
+
+    //-
+    START -> MinusOp [label="-"];
+    MinusOp -> Error [label="[|\\!@#{}'$^&].*"]
+
+    //*
+    START -> MultiplyOp [label="*"];
+    MultiplyOp -> Error [label="[|\\!@#{}'$^&].*"]
+
+    ///
+    START -> DivideOp [label="/"];
+    DivideOp -> Error [label="[|\\!@#{}'$^&].*"]
+
+    //=
+    START -> EqualOp [label="="];
+    EqualOp -> Error [label="[|\\!@#{}'$^&].*"]
+
+    //<
+    START -> LessThanOp [label="<"];
+    LessThanOp -> Error [label="[|\\!@#{}'$^&].*"]
+
+    //<=
+    START -> LessThanOrEqualOp [label="<="];
+    LessThanOrEqualOp -> Error [label="[|\\!@#{}'$^&].*"]
+
+    //>
+    START -> GreaterThanOp [label=">"];
+    GreaterThanOp -> Error [label="[|\\!@#{}'$^&].*"]
+
+    //>=
+    START -> GreaterThanOrEqualOp [label=">="];
+    GreaterThanOrEqualOp -> Error [label="[|\\!@#{}'$^&].*"]
+
+    //<>
+    START -> NotEqualOp [label="<>"];
+    NotEqualOp -> Error [label="[|\\!@#{}'$^&].*"]
+
+    //.
+    START -> Dot [label="."];
+    Dot -> Error [label="[|\\!@#{}'$^&].*"]
+
+    //,
+    START -> Comma [label=","]
+    Comma -> Error [label="[|\\!@#{}'$^&].*"]
+
+    //;
+    START -> Semicolon [label=";"]
+    Semicolon -> Error [label="[|\\!@#{}'$^&].*"]
+
+    //:
+    START -> Colon [label=":"]
+    Colon -> Error [label="[|\\!@#{}'$^&].*"]
+
+    //(
+    START -> LeftBracket [label="("]
+    LeftBracket -> Error [label="[|\\!@#{}'$^&].*"]
+
+    //)
+    START -> RightBracket [label=")"]
+    RightBracket -> Error [label="[|\\!@#{}'$^&].*"]
+
+    ///*
+    START -> multilinecommentstart[label="/*"]
+    multilinecommentstart -> Error [label="[|\\!@#{}'$^&].*"]
+
+    //%
+    START -> singlelinecommentstart[label="%"]
+
+    singlelinecommentstart -> singlelinecomment[label=".*\\n"]
+
+    multilinecommentstart -> multilinecommentend[label=".*"]
+
+    multilinecommentend -> multilinecommnet [label="*/"]
+    
+    //TODO
+    // START -> doublequotes [label='"']
+    // START -> assignment_operator [label=":-"]
+    // START -> newline [label="\n"]
+
+    START -> Identifier [label="^[A-Z_][a-zA-Z0-9_]*"];
+    Identifier -> Error [label="[|\\!@#{}'$^&].*"]
+
+    START -> Integer [label="^[0-9]+"];
+    Integer -> Error [label="[|\\!@#{}'$^&].*"]
+
+    START -> Symbol [label="[a-z][a-zA-Z0-9_]*"];
+    Symbol -> Error [label="[|\\!@#{}'$^&].*"]
+
+    START -> Char [label="'"];
+    Char -> Error [label="[|\\!@#{}'$^&].*"]
+
+    START -> String [label="\""];
+    String -> Error [label="[|\\!@#{}'$^&].*"]
+
+    START -> Real [label="[0-9]+[.][0-9]+"];
+    Real -> Error [label="[|\\!@#{}'$^&].*"]
+
+    START -> Constant [label="^[0-9]+"]
+    Constant -> Error [label="[|\\!@#{}'$^&].*"]
+    
+
+    // Predicates -> Dot [label="."];
+    // Clauses -> Dot [label="."];
+    // Goal -> Dot [label="."];
+
+    // Identifier -> LeftBracket [label="("];
+    // Integer -> LeftBracket [label="("];
+    // Symbol -> LeftBracket [label="("];
+    // Char -> LeftBracket [label="("];
+    // String -> LeftBracket [label="("];
+    // Real -> LeftBracket [label="("];
+
+    // LeftBracket -> RightBracket [label=")"];
+    // Comma -> Identifier [label="[A-Z_][a-zA-Z0-9_]*"];
+    // Comma -> Integer [label="[0-9]+"];
+    // Comma -> Symbol [label="[a-z][a-zA-Z0-9_]*"];
+    // Comma -> Char [label="'"];
+    // Comma -> String [label="\""];
+    // Comma -> Real [label="[0-9]+[.][0-9]+"];
+
+    // Identifier -> Comma [label=","];
+    // Integer -> Comma [label=","];
+    // Symbol -> Comma [label=","];
+    // Char -> Comma [label=","];
+    // String -> Comma [label=","];
+    // Real -> Comma [label=","];
+
+    // Comma -> RightParenthesis [label=")"];
+    // Semicolon -> Identifier [label="[A-Z_][a-zA-Z0-9_]*"];
+    // Semicolon -> Integer [label="[0-9]+"];
+    // Semicolon -> Symbol [label="[a-z][a-zA-Z0-9_]*"];
+    // Semicolon -> Char [label="'"];
+    // Semicolon -> String [label="\""];
+    // Semicolon -> Real [label="[0-9]+[.][0-9]+"];
+
+    // Identifier -> Semicolon [label=";"];
+    // Integer -> Semicolon [label=";"];
+    // Symbol -> Semicolon [label=";"];
+    // Char -> Semicolon [label=";"];
+    // String -> Semicolon [label=";"];
+    // Real -> Semicolon [label=";"];
+
+    // Semicolon -> Identifier [label="[A-Z_][a-zA-Z0-9_]*"];
+    // Semicolon -> Integer [label="[0-9]+"];
+    // Semicolon -> Symbol [label="[a-z][a-zA-Z0-9_]*"];
+    // Semicolon -> Char [label="'"];
+    // Semicolon -> String [label="\""];
+    // Semicolon -> Real [label="[0-9]+[.][0-9]+"];
+
+    // Read -> Identifier [label="[A-Z_][a-zA-Z0-9_]*"];
+    // Readln -> Identifier [label="[A-Z_][a-zA-Z0-9_]*"];
+    // Write -> Identifier [label="[A-Z_][a-zA-Z0-9_]*"];
+    // Writeln -> Identifier [label="[A-Z_][a-zA-Z0-9_]*"];
+
+    // START -> Comment [label="%"];
+    // Comment -> Comment [label=".*\\n"];
+    // Comment -> START [label="\\n"];
+
+    // START -> Comment [label="/*"];
+    // Comment -> Comment [label=".*\\*/"];
+    // Comment -> START [label="\\*/"];
+    
+
+//Error
+    START -> Error [label="Invalid Input"];
+    Error -> Error [label=".*"];
+}
